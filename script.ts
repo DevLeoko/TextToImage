@@ -7,14 +7,15 @@ ctx.fillStyle = "black";
 
 
 function printText(text: string){
-  const { actualBoundingBoxLeft, actualBoundingBoxRight, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(text);
-  canvas.width = actualBoundingBoxLeft + actualBoundingBoxRight;
+  const { width, actualBoundingBoxLeft, actualBoundingBoxRight, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(text);
+  canvas.width = Math.max(actualBoundingBoxLeft + actualBoundingBoxRight, width);
   canvas.height = actualBoundingBoxAscent + actualBoundingBoxDescent;
   ctx.font = "50px 'Fredericka the Great', cursive";
   ctx.clearRect(0, 0, 10000, 10000);
   ctx.fillText(text, 0, actualBoundingBoxAscent);
 
   image.src = canvas.toDataURL();
+  image.style.maxWidth = `${canvas.width}px`
 }
 
 input.addEventListener("input", (_) => printText(input.value));
