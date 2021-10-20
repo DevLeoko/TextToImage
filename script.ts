@@ -10,7 +10,7 @@ function printText(text: string){
   const { width, actualBoundingBoxLeft, actualBoundingBoxRight, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(text);
   canvas.width = Math.max(actualBoundingBoxLeft + actualBoundingBoxRight, width);
   canvas.height = actualBoundingBoxAscent + actualBoundingBoxDescent;
-  ctx.font = "50px 'Fredericka the Great', cursive";
+  ctx.font = "70px 'Fredericka the Great', cursive";
   ctx.clearRect(0, 0, 10000, 10000);
   ctx.fillText(text, 0, actualBoundingBoxAscent);
 
@@ -18,7 +18,7 @@ function printText(text: string){
   image.style.maxWidth = `${canvas.width}px`
 }
 
-input.addEventListener("input", (_) => printText(input.value));
+input.addEventListener("input", (_) => printText(input.value || "Enter your text..."));
 
 printText("Enter your text...")
 setTimeout(() => printText("Enter your text..."), 300);
